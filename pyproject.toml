@@ -7,6 +7,7 @@ name = "time-sync-mcp"
 version = "1.0.0"
 description = "Time Sync MCP Server - 提供时间相关工具"
 requires-python = ">=3.10"
+dependencies = ["pytz"]
 
 [project.scripts]
 time-sync-mcp = "server:main"

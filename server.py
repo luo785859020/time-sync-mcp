@@ -107,15 +107,17 @@ def handle_mcp_request(request):
             fmt = arguments.get("format", "YYYY-MM-DD HH:mm:ss")
             now = datetime.now()
             
-            # 简单格式化
+            # 格式化时间
             formatted = now.strftime("%Y-%m-%d %H:%M:%S")
-            if timezone != "UTC":
+            
+            # 如果指定了时区，尝试转换
+            if timezone and timezone != "UTC":
                 try:
                     import pytz
                     tz = pytz.timezone(timezone)
-                    now_tz = now.astimezone(tz)
-                    formatted = now_tz.strftime("%Y-%m-%d %H:%M:%S")
-                except:
+                    now = datetime.now(tz)
+                    formatted = now.strftime("%Y-%m-%d %H:%M:%S")
+                except Exception:
                     pass
             
             result = {
@@ -142,13 +144,15 @@ def handle_mcp_request(request):
                 dt = datetime.fromtimestamp(ts)
             
             formatted = dt.strftime("%Y-%m-%d %H:%M:%S")
-            if timezone != "UTC":
+            
+            # 如果指定了时区，尝试转换
+            if timezone and timezone != "UTC":
                 try:
                     import pytz
                     tz = pytz.timezone(timezone)
                     dt = dt.replace(tzinfo=pytz.UTC).astimezone(tz)
                     formatted = dt.strftime("%Y-%m-%d %H:%M:%S")
-                except:
+                except Exception:
                     pass
             
             result = {
