@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "time-sync": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/your-username/time-sync-mcp",
+        "time-sync-mcp"
+      ]
+    }
+  }
+}
